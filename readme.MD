@@ -1,4 +1,4 @@
-# Sample JWT playground
+# Sample JWT (RFC 7519) playground
 
 ## first generate private and public key ie here
 

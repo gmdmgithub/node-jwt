@@ -16,7 +16,7 @@ const passPhrase = process.env.PASS_PHRASE;
 const signOptions = {
     issuer: "My Company",
     subject: "token.user@company.com",
-    expiresIn: "5m",
+    expiresIn: "5m", //12h, 5d - hour or day
     algorithm: "RS256"
 };
 
@@ -57,7 +57,7 @@ app.get("/open-message", (req, res) => {
  * Function isAuthorized checks if the request id authorized to access the endpoint
  * @param {http request} req 
  * @param {http response} res 
- * @param {pass} next 
+ * @param {pass and go to next step} next 
  */
 function isAuthorized(req, res, next) {
     if (typeof req.headers.authorization !== "undefined") {
@@ -68,7 +68,7 @@ function isAuthorized(req, res, next) {
 
         // Here we validate that the JSON Web Token is valid and has been 
         // created using the same private pass phrase
-        jwt.verify(token, publicKEY, signOptions, (err, user) => {
+        jwt.verify(token, publicKEY, signOptions, (err, encoded) => {
 
             // if there has been an error...
             if (err) {
