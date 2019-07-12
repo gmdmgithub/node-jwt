@@ -27,7 +27,12 @@ let payload ={
     someData4: {
         name: "Alex",
         surname: "Springer"
-    }
+    },
+    roles: [
+        "PAYMENT",
+        "PROFILE",
+        "DATA"
+      ]
 };
 
 app.get('/jwt', (req, res) => {
@@ -38,7 +43,7 @@ app.get('/jwt', (req, res) => {
 
 
 app.get("/", (req, res) => {
-    res.send("Hi there")
+    res.send("Hi there - home page here, not protected")
 })
 
 app.get("/protected", isAuthorized, (req, res) => {
@@ -49,7 +54,7 @@ app.get("/protected", isAuthorized, (req, res) => {
 
 app.get("/open-message", (req, res) => {
     res.json({
-        "message": "My message"
+        "message": "My open access message"
     });
 });
 
@@ -73,7 +78,6 @@ function isAuthorized(req, res, next) {
             // if there has been an error...
             if (err) {
                 console.log(err);
-                
                 // shut them out!
                 res.status(500).json({
                     error: "Not Authorized"
