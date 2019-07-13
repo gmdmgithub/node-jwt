@@ -34,7 +34,7 @@ let payload ={
         "DATA"
       ]
 };
-
+// here we generate JWT token - should be as a function after login
 app.get('/jwt', (req, res) => {
     // const token = jwt.sign({ "body": "This is my body" }, passPhrase, { algorithm: 'HS256'});
     const token = jwt.sign(payload, privateKey, signOptions);
@@ -79,10 +79,14 @@ function isAuthorized(req, res, next) {
             if (err) {
                 console.log(err);
                 // shut them out!
-                res.status(500).json({
+                res.status(500).json({ //od 401 it depends
                     error: "Not Authorized"
                 });
                 throw new Error("Not Authorized");
+
+                //or
+                //res.send({message: 'Not Authorized', status: 401});
+                //return
             }
             // if the JWT is valid, allow them to hit
             // the intended endpoint

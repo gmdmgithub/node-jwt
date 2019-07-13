@@ -7,3 +7,6 @@ https://www.csfieldguide.org.nz/en/interactives/rsa-key-generator/
 http://travistidwell.com/jsencrypt/demo/
 ```
 
+## then generate JWT token based on passPhrase or private/public key
+
+##
